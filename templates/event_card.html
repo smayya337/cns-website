@@ -1,0 +1,21 @@
+<div class="card">
+    <div class="row g-0">
+        <div class="col-2">
+            <img src="{{ evt.image.url }}" class="rounded-start"
+                 style="width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1/1;"
+                 alt="Image for event {{ evt.name }}">
+        </div>
+        <div class="col">
+            <div class="card-body">
+                <h5 class="card-title">{{ evt.name }}</h5>
+                {% if evt.end %}
+                    <p class="mb-1 card-subtitle text-muted"><strong>When: </strong>{{ evt.start }} - {{ evt.end }}</p>
+                {% else %}
+                    <p class="mb-1 card-subtitle text-muted"><strong>When: </strong>{{ evt.start }}</p>
+                {% endif %}
+                <p class="mb-1 card-subtitle text-muted"><strong>Where: </strong> {{ evt.location }}</p>
+                <p class="card-text">{{ evt.description }}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+{% if officers %}
+    <h3 class="pb-3">Officers</h3>
+    {% include "officers_section.html" %}
+{% endif %}
+{% if advisors %}
+    <h3 class="pb-3">Faculty Advisors</h3>
+    {% include "officers_section.html" with officers=advisors %}
+{% endif %}

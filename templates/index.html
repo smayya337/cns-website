@@ -1,0 +1,75 @@
+{% extends "_base.html" %}
+
+{% block content %}
+    <h1>ACM @ UVA</h1>
+    <i>The Undergraduate Computer Science Community!</i>
+    <div class="pt-3">
+        <a href="https://discord.gg/wxWgbVs" class="btn btn-primary pt-auto me-3"
+           style="background-color: var(--bs-purple); border-color: var(--bs-purple);">
+            <i class="bi bi-discord me-2"></i>
+            Discord
+        </a>
+        <a href="https://lists.virginia.edu/sympa/subscribe/acm-members" class="btn btn-primary pt-auto me-3"
+           style="background-color: var(--bs-orange); border-color: var(--bs-orange);">
+            <i class="bi bi-person-fill-add me-2"></i>
+            Mailing List
+        </a>
+        <a href="mailto:acm-officers@virginia.edu" class="btn btn-primary pt-auto me-3"
+           style="background-color: var(--bs-pink); border-color: var(--bs-pink);">
+            <i class="bi bi-envelope-fill me-2"></i>
+            Contact Us
+        </a>
+    </div>
+    <div id="homePageCarousel" class="carousel slide mt-4 w-50 mx-auto" data-bs-ride="false">
+        <div class="carousel-indicators">
+            {% for carousel_image in carousel_images %}
+                {% if forloop.first %}
+                    <button type="button" data-bs-target="#homePageCarousel" data-bs-slide-to="{{ forloop.counter0 }}"
+                            class="active"
+                            aria-current="true" aria-label="{{ carousel_image.label }}"></button>
+                {% else %}
+                    <button type="button" data-bs-target="#homePageCarousel" data-bs-slide-to="{{ forloop.counter0 }}"
+                            aria-label="{{ carousel_image.label }}"></button>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="carousel-inner">
+            {% for carousel_image in carousel_images %}
+                {% if forloop.first %}
+                    <div class="carousel-item active">
+                        <img src="{{ carousel_image.image.url }}" class="d-block w-100"
+                             alt="{{ carousel_image.label }}">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{{ carousel_image.label }}</h5>
+                            {% if carousel_image.caption %}
+                                <p>{{ carousel_image.caption }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="carousel-item">
+                        <img src="{{ carousel_image.image.url }}" class="d-block w-100"
+                             alt="{{ carousel_image.label }}">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{{ carousel_image.label }}</h5>
+                            {% if carousel_image.caption %}
+                                <p>{{ carousel_image.caption }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#homePageCarousel"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#homePageCarousel"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+{% endblock %}

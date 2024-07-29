@@ -1,0 +1,37 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block content %}
+    <h1>About Us</h1>
+    <div class="row row-cols-3">
+    <div>
+        <h2>Who are we?</h2>
+        <p>The Association for Computing Machinery Chapter at the University of Virginia is a student chapter of the parent Association for Computing Machinery. The Chapter is a Contracted Independent Orginization (CIO) at the University of Virginia, and serves students, faculty, and staff of the University as well as members of the Charlottesville / Albemarle community.</p>
+    </div>
+    <div>
+        <h2>What do we do?</h2>
+    <p>ACM has a number of events each semester, ranging from social events (game nights, student-faculty luncheons, etc.), academic events (tutoring, talks, etc.), and competitive events (ICPC and HSPC). Please see our calendar for a list of planned upcoming events.</p>
+    <p>Any member of the University or Charlottesville / Albemarle community may become a member of the chapter. To join ACM, send an e-mail to <a href="mailto:acm-officers@virginia.edu">acm-officers@virginia.edu</a>.</p>
+    </div>
+    <div>
+        <h2>Supporting ACM @ UVA</h2>
+    <p>ACM is a 501(c) nonprofit organization. Our funds go towards hosting great events for students, including HSPC.</p>
+    <h2>Bylaws</h2>
+    <p>The chapter bylaws are available <a href="{% static '2020-ACM-Bylaws.pdf' %}">here</a>.</p>
+    </div>
+    </div>
+    <div>
+    <h2 class="mb-3">Leadership</h2>
+    {% include "leadership.html" %}
+    {% if past_years %}
+    <h3 class="pb-3">Past Years</h3>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3 pb-3">
+    {% for py in past_years %}
+        <div class="col">
+            <a href="{{ py.link }}"><h5>{{ py.year }}</h5></a>
+        </div>
+    {% endfor %}
+    {% endif %}
+    </div>
+</div>
+{% endblock %}

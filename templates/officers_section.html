@@ -1,0 +1,7 @@
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3 pb-3">
+    {% for officer in officers %}
+        <div class="col">
+            {% include "officer_card.html" %}
+        </div>
+    {% endfor %}
+</div>

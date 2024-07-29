@@ -1,0 +1,10 @@
+.idea
+.vscode
+static
+.venv
+db.sqlite3
+media
+!staticfiles/acm.png
+!staticfiles/acm.svg
+acm_website/secret.py
+__pycache__

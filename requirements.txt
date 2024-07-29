@@ -1,0 +1,18 @@
+# Code formatter
+black~=24.4.2
+# Django
+Django~=5.0.7
+# Bootstrap for Django
+django-bootstrap-v5~=1.0.11
+# Helps with forms
+django-crispy-forms~=2.3
+# Web server
+gunicorn~=22.0.0
+# Markdown parser
+mistune~=3.0.2
+# Code syntax highlighting
+pygments~=2.18.0
+# Static file generation
+whitenoise~=6.7.0
+# Needed for ImageField
+Pillow~=10.4.0
