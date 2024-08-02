@@ -8,14 +8,18 @@ from acm_website.settings import VENMO_LINK, ZELLE_LINK
 
 def index(request):
     carousel_images = CarouselImage.objects.all()
-    context = {'carousel_images': carousel_images}
+    context = {"carousel_images": carousel_images}
     return render(request, "index.html", context)
 
 
 def about(request):
     year = Officer.objects.order_by("-year")[0].year
-    past_years = sorted(list({o.year for o in Officer.objects.all() if o.year < year}), reverse=True)
-    past_year_links = [{"year": f"{py}-{py + 1}", "link": f"/about/{py}"} for py in past_years]
+    past_years = sorted(
+        list({o.year for o in Officer.objects.all() if o.year < year}), reverse=True
+    )
+    past_year_links = [
+        {"year": f"{py}-{py + 1}", "link": f"/about/{py}"} for py in past_years
+    ]
     officers = (
         Officer.objects.filter(year=year)
         .filter(faculty_advisor=False)
@@ -69,10 +73,7 @@ def icpc(request):
 
 
 def donate(request):
-    context = {
-        "venmo": VENMO_LINK,
-        "zelle": ZELLE_LINK
-    }
+    context = {"venmo": VENMO_LINK, "zelle": ZELLE_LINK}
     return render(request, "donate.html", context)
 
 

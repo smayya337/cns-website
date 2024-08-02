@@ -13,7 +13,9 @@ class Officer(models.Model):
     position = models.CharField(
         max_length=30, null=False, blank=False, help_text="Position"
     )
-    bio = models.TextField(null=False, blank=True, help_text="Officer's biography (Markdown is supported)")
+    bio = models.TextField(
+        null=False, blank=True, help_text="Officer's biography (Markdown is supported)"
+    )
     sort_order = models.IntegerField(
         default=0, help_text="Optional sort order of officer"
     )
@@ -39,12 +41,24 @@ class Officer(models.Model):
 
 
 class Event(models.Model):
-    name = models.CharField(max_length=30, null=False, blank=False, help_text="Event name")
-    start = models.DateTimeField(default=timezone.now, help_text="Event start date and time")
-    end = models.DateTimeField(null=True, blank=True, help_text="Optional event end date and time")
-    location = models.CharField(max_length=30, null=False, blank=False, help_text="Event location")
-    description = models.TextField(null=False, blank=True, default="", help_text="Optional event description")
-    image = models.ImageField(upload_to="events/", default="acm.png", help_text="Event image")
+    name = models.CharField(
+        max_length=30, null=False, blank=False, help_text="Event name"
+    )
+    start = models.DateTimeField(
+        default=timezone.now, help_text="Event start date and time"
+    )
+    end = models.DateTimeField(
+        null=True, blank=True, help_text="Optional event end date and time"
+    )
+    location = models.CharField(
+        max_length=30, null=False, blank=False, help_text="Event location"
+    )
+    description = models.TextField(
+        null=False, blank=True, default="", help_text="Optional event description"
+    )
+    image = models.ImageField(
+        upload_to="events/", default="acm.png", help_text="Event image"
+    )
 
     def __str__(self):
         date_string = f"{self.start}"
@@ -54,11 +68,21 @@ class Event(models.Model):
 
 
 class CarouselImage(models.Model):
-    image = models.ImageField(upload_to="carousel/", help_text="An image for the home page carousel")
-    label = models.CharField(max_length=30, null=False, blank=False, help_text="A label for the image")
-    caption = models.TextField(null=False, blank=True, default="",
-                               help_text="An optional extended caption for the image")
-    sort_order = models.IntegerField(default=0, help_text="Optional sort order of image")
+    image = models.ImageField(
+        upload_to="carousel/", help_text="An image for the home page carousel"
+    )
+    label = models.CharField(
+        max_length=30, null=False, blank=False, help_text="A label for the image"
+    )
+    caption = models.TextField(
+        null=False,
+        blank=True,
+        default="",
+        help_text="An optional extended caption for the image",
+    )
+    sort_order = models.IntegerField(
+        default=0, help_text="Optional sort order of image"
+    )
 
     def __str__(self):
         return self.label
@@ -66,8 +90,28 @@ class CarouselImage(models.Model):
 
 class HSPCContest(models.Model):
     year = models.IntegerField(unique=True, default=timezone.now().year)
-    problem_set = models.FileField(upload_to="hspc/problems/", null=False, blank=False, help_text="Problem set PDF")
-    judge_data = models.FileField(upload_to="hspc/judge/", null=False, blank=False, help_text="Judge input/output ZIP")
+    problem_set = models.FileField(
+        upload_to="hspc/problems/", null=False, blank=False, help_text="Problem set PDF"
+    )
+    judge_data = models.FileField(
+        upload_to="hspc/judge/",
+        null=False,
+        blank=False,
+        help_text="Judge input/output ZIP",
+    )
 
     def __str__(self):
         return f"{self.year}"
+
+
+class NavBarLink(models.Model):
+    url = models.CharField(
+        max_length=150, null=False, blank=False, unique=True, help_text="Link to page"
+    )
+    label = models.CharField(
+        max_length=30, null=False, blank=False, help_text="A label for the link"
+    )
+    sort_order = models.IntegerField(default=0, help_text="Optional sort order of link")
+
+    def __str__(self):
+        return self.label

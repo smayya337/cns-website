@@ -31,12 +31,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link align-baseline" href="/about">About</a>
-                <a class="nav-link align-baseline" href="/events">Events</a>
-                <a class="nav-link align-baseline" href="/icpc">ICPC</a>
-                <a class="nav-link align-baseline" href="/hspc">HSPC</a>
-                <a class="nav-link align-baseline" href="https://www.sigai-at-uva.org/">SIGAI</a>
-                <a class="nav-link align-baseline" href="/donate">Donate</a>
+                {% for link in links %}
+                	<a class="nav-link align-baseline" href="{{ link.url }}">{{ link.label }}</a>
+                {% endfor %}
+                
             </div>
         </div>
     </div>
