@@ -1,13 +1,7 @@
 <div class="p-4 bg-light rounded overflow-scroll">
     {% for evt in events %}
-        {% if forloop.last %}
-            <div>
+        <div {% if not forloop.last %} class="mb-3" {% endif %}>
             {% include "event_card.html" %}
-            </div>
-        {% else %}
-            <div class="mb-3">
-            {% include "event_card.html" %}
-            </div>
-        {% endif %}
+        </div>
     {% endfor %}
 </div>

@@ -23,42 +23,23 @@
     <div id="homePageCarousel" class="carousel slide mt-4 w-50 mx-auto" data-bs-ride="false">
         <div class="carousel-indicators">
             {% for carousel_image in carousel_images %}
-                {% if forloop.first %}
-                    <button type="button" data-bs-target="#homePageCarousel" data-bs-slide-to="{{ forloop.counter0 }}"
-                            class="active"
-                            aria-current="true" aria-label="{{ carousel_image.label }}"></button>
-                {% else %}
-                    <button type="button" data-bs-target="#homePageCarousel" data-bs-slide-to="{{ forloop.counter0 }}"
-                            aria-label="{{ carousel_image.label }}"></button>
-                {% endif %}
+                <button type="button" data-bs-target="#homePageCarousel" data-bs-slide-to="{{ forloop.counter0 }}"
+                        {% if forloop.first %} class="active"
+                        aria-current="true" {% endif %} aria-label="{{ carousel_image.label }}"></button>
             {% endfor %}
         </div>
         <div class="carousel-inner">
             {% for carousel_image in carousel_images %}
-                {% if forloop.first %}
-                    <div class="carousel-item active">
-                        <img src="{{ carousel_image.image.url }}" class="d-block w-100"
-                             alt="{{ carousel_image.label }}">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>{{ carousel_image.label }}</h5>
-                            {% if carousel_image.caption %}
-                                <p>{{ carousel_image.caption }}</p>
-                            {% endif %}
-                        </div>
+                <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                    <img src="{{ carousel_image.image.url }}" class="d-block w-100"
+                         alt="{{ carousel_image.label }}">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>{{ carousel_image.label }}</h5>
+                        {% if carousel_image.caption %}
+                            <p>{{ carousel_image.caption }}</p>
+                        {% endif %}
                     </div>
-                {% else %}
-                    <div class="carousel-item">
-                        <img src="{{ carousel_image.image.url }}" class="d-block w-100"
-                             alt="{{ carousel_image.label }}">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>{{ carousel_image.label }}</h5>
-                            {% if carousel_image.caption %}
-                                <p>{{ carousel_image.caption }}</p>
-                            {% endif %}
-                        </div>
-                    </div>
-                {% endif %}
-
+                </div>
             {% endfor %}
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#homePageCarousel"
