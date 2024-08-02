@@ -1,4 +1,3 @@
-from django.core.validators import EmailValidator
 from django.db import models
 from django.utils import timezone
 
@@ -87,6 +86,10 @@ class CarouselImage(models.Model):
     def __str__(self):
         return self.label
 
+    class Meta:
+        verbose_name = "Carousel image"
+        verbose_name_plural = "Carousel images"
+
 
 class HSPCContest(models.Model):
     year = models.IntegerField(unique=True, default=timezone.now().year)
@@ -103,6 +106,10 @@ class HSPCContest(models.Model):
     def __str__(self):
         return f"{self.year}"
 
+    class Meta:
+        verbose_name = "HSPC contest"
+        verbose_name_plural = "HSPC contests"
+
 
 class NavBarLink(models.Model):
     url = models.CharField(
@@ -115,3 +122,7 @@ class NavBarLink(models.Model):
 
     def __str__(self):
         return self.label
+
+    class Meta:
+        verbose_name = "Navbar link"
+        verbose_name_plural = "Navbar links"
