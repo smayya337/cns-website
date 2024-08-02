@@ -1,0 +1,186 @@
+:root {
+    color: #fff;
+	--bs-blue: #0d6efd;
+	--bs-indigo: #6610f2;
+	--bs-purple: #6f42c1;
+	--bs-pink: #d63384;
+	--bs-red: #dc3545;
+	--bs-orange: #fd7e14;
+	--bs-yellow: #ffc107;
+	--bs-green: #198754;
+	--bs-teal: #20c997;
+	--bs-cyan: #0dcaf0;
+	--bs-white: #fff;
+	--bs-gray: #6c757d;
+	--bs-gray-dark: #343a40;
+	--bs-gray-100: #f8f9fa;
+	--bs-gray-200: #e9ecef;
+	--bs-gray-300: #dee2e6;
+	--bs-gray-400: #ced4da;
+	--bs-gray-500: #adb5bd;
+	--bs-gray-600: #6c757d;
+	--bs-gray-700: #495057;
+	--bs-gray-800: #343a40;
+	--bs-gray-900: #212529;
+	--bs-primary: #0d6efd;
+	--bs-secondary: #6c757d;
+	--bs-success: #198754;
+	--bs-info: #0dcaf0;
+	--bs-warning: #ffc107;
+	--bs-danger: #dc3545;
+	--bs-light: #f8f9fa;
+	--bs-dark: #212529;
+	--bs-primary-rgb: 13,110,253;
+	--bs-secondary-rgb: 108,117,125;
+	--bs-success-rgb: 25,135,84;
+	--bs-info-rgb: 13,202,240;
+	--bs-warning-rgb: 255,193,7;
+	--bs-danger-rgb: 220,53,69;
+	--bs-light-rgb: 248,249,250;
+	--bs-dark-rgb: 33,37,41;
+	--bs-white-rgb: 255,255,255;
+	--bs-black-rgb: 0,0,0;
+	--bs-body-color-rgb: 33,37,41;
+	--bs-body-bg-rgb: 255,255,255;
+	--bs-font-sans-serif: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+	--bs-font-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+	--bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+	--bs-body-font-family: var(--bs-font-sans-serif);
+	--bs-body-font-size: 1rem;
+	--bs-body-font-weight: 400;
+	--bs-body-line-height: 1.5;
+	--bs-body-color: #212529;
+	--bs-body-bg: #fff;
+}
+
+.btn-blue {
+    color: #fff;
+    background-color: var(--bs-blue);
+    border-color: var(--bs-blue);
+}
+
+.btn-indigo {
+    color: #fff;
+    background-color: var(--bs-indigo);
+    border-color: var(--bs-indigo);
+}
+
+.btn-purple {
+    color: #fff;
+    background-color: var(--bs-purple);
+    border-color: var(--bs-purple);
+}
+
+.btn-pink {
+    color: #fff;
+    background-color: var(--bs-pink);
+    border-color: var(--bs-pink);
+}
+
+.btn-red {
+    color: #fff;
+    background-color: var(--bs-red);
+    border-color: var(--bs-red);
+}
+
+.btn-orange {
+    color: #fff;
+    background-color: var(--bs-orange);
+    border-color: var(--bs-orange);
+}
+
+.btn-yellow {
+    color: #fff;
+    background-color: var(--bs-yellow);
+    border-color: var(--bs-yellow);
+}
+
+.btn-green {
+    color: #fff;
+    background-color: var(--bs-green);
+    border-color: var(--bs-green);
+}
+
+.btn-teal {
+    color: #fff;
+    background-color: var(--bs-teal);
+    border-color: var(--bs-teal);
+}
+
+.btn-cyan {
+    color: #fff;
+    background-color: var(--bs-cyan);
+    border-color: var(--bs-cyan);
+}
+
+.btn-white {
+    color: #fff;
+    background-color: var(--bs-white);
+    border-color: var(--bs-white);
+}
+
+.btn-gray {
+    color: #fff;
+    background-color: var(--bs-gray);
+    border-color: var(--bs-gray);
+}
+
+.btn-gray-dark {
+    color: #fff;
+    background-color: var(--bs-gray-dark);
+    border-color: var(--bs-gray-dark);
+}
+
+.btn-gray-100 {
+    color: #fff;
+    background-color: var(--bs-gray-100);
+    border-color: var(--bs-gray-100);
+}
+
+.btn-gray-200 {
+    color: #fff;
+    background-color: var(--bs-gray-200);
+    border-color: var(--bs-gray-200);
+}
+
+.btn-gray-300 {
+    color: #fff;
+    background-color: var(--bs-gray-300);
+    border-color: var(--bs-gray-300);
+}
+
+.btn-gray-400 {
+    color: #fff;
+    background-color: var(--bs-gray-400);
+    border-color: var(--bs-gray-400);
+}
+
+.btn-gray-500 {
+    color: #fff;
+    background-color: var(--bs-gray-500);
+    border-color: var(--bs-gray-500);
+}
+
+.btn-gray-600 {
+    color: #fff;
+    background-color: var(--bs-gray-600);
+    border-color: var(--bs-gray-600);
+}
+
+.btn-gray-700 {
+    color: #fff;
+    background-color: var(--bs-gray-700);
+    border-color: var(--bs-gray-700);
+}
+
+.btn-gray-800 {
+    color: #fff;
+    background-color: var(--bs-gray-800);
+    border-color: var(--bs-gray-800);
+}
+
+.btn-gray-900 {
+    color: #fff;
+    background-color: var(--bs-gray-900);
+    border-color: var(--bs-gray-900);
+}
