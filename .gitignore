@@ -6,5 +6,6 @@ db.sqlite3
 media
 !staticfiles/acm.png
 !staticfiles/acm.svg
+!staticfiles/2020-ACM-Bylaws.pdf
 acm_website/secret.py
 __pycache__
