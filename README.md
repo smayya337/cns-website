@@ -6,9 +6,9 @@ This is the source code for a brand-new ACM @ UVA website written using Django a
 
 ```bash
 # clone repo
-git clone https://github.com/smayya337/acm_website
+git clone https://github.com/smayya337/acm-website
 # enter repo
-cd acm_website
+cd acm-website
 # create secret configuration settings file
 cp acm_website/secret.py.example acm_website/secret.py
 # edit secret configuration settings
