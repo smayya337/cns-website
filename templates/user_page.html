@@ -1,21 +1,38 @@
 {% extends "_base.html" %}
-{% load static %}
+
 {% load markdown %}
 
 {% block content %}
-	<h1>{{ user.first_name }} {{ user.last_name }}</h1>
-    {% if user.image %}
-    <img src="{{ user.image.url }}" class="w-25" style="object-fit: cover; aspect-ratio: 1/1;"
-         alt="Image of {{ user.first_name }} {{ user.last_name }}">
-    {% else %}
-    <img src="{% static 'acm.png' %}" class="w-25" style="object-fit: cover; aspect-ratio: 1/1;"
-         alt="Image of {{ user.first_name }} {{ user.last_name }}">
-    {% endif %}
-    <p>{{ user.bio | markdown | remove_p_tags | safe }}</p>
-    <div>
-    {% for badge in user.badges.all %}
-        {% include 'badge.html' with badge=badge %}
-    {% endfor %}
-    <p><strong>Account created:</strong> {{ user.date_joined }}</p>
+    <div class="d-flex flex-row">
+        <div class="flex-shrink-1">
+            {% include "profile_image.html" %}
+        </div>
+        <div class="flex-grow-1 ps-5">
+            <div class="d-flex flex-row">
+                <h1 class="me-4">{{ user.first_name }} {{ user.last_name }}</h1>
+                <a href="mailto:{{ user.username }}@virginia.edu" title="Email {{ user.first_name }} {{ user.last_name }}" class="p-2 rounded-circle border border-1 my-auto"><i class="bi bi-envelope text-muted"></i></a>
+            </div>
+            <p>{{ user.bio | markdown | remove_p_tags | safe }}</p>
+        </div>
     </div>
+    {% if badges %}
+        <div class="pt-3">
+        <h2>Achievements</h2>
+        {% for badge in badges %}
+            {% include 'badge.html' %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if events_attended %}
+        <div class="pt-3">
+        <h2>Events Attended</h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3 pb-3">
+        {% for evt in events_attended %}
+            <div class="col">
+            {% include 'profile_event_card.html' %}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 {% endblock %}

@@ -1,0 +1,15 @@
+{% load static %}
+{% load markdown %}
+
+<div class="card h-100">
+    {% if evt.image %}
+    <img src="{{ evt.image.url }}" class="card-img-top" style="object-fit: cover; aspect-ratio: 1/1;"
+         alt="Image for event {{ evt.name }}">
+    {% else %}
+    <img src="{% static 'acm.png' %}" class="card-img-top" style="object-fit: cover; aspect-ratio: 1/1;"
+         alt="Image for event {{ evt.name }}">
+    {% endif %}
+    <div class="card-body">
+        <h5 class="card-title event-card-title">{{ evt.name }}</h5>
+    </div>
+</div>

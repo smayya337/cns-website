@@ -23,11 +23,11 @@ from . import views, settings
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.index, name="index"),
-    path("about/<int:year>", views.past_officers, name="past_officers"),
+    path("about/<int:year>/", views.past_officers, name="past_officers"),
     path("about/", views.about, name="about"),
     path("events/", views.events, name="events"),
     path("icpc/", views.icpc, name="icpc"),
     path("donate/", views.donate, name="donate"),
     path("hspc/", views.hspc, name="hspc"),
-    path("users/<str:user>", views.user_page, name="user_page"),
+    path("users/<str:user>/", views.user_page, name="user_page"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

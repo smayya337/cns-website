@@ -54,12 +54,12 @@ def past_officers(request, year=timezone.now().year):
     officers = (
         Officer.objects.filter(year=year)
         .filter(faculty_advisor=False)
-        .order_by("sort_order", "first_name", "last_name")
+        .order_by("sort_order", "user")
     )
     advisors = (
         Officer.objects.filter(year=year)
         .filter(faculty_advisor=True)
-        .order_by("sort_order", "first_name", "last_name")
+        .order_by("sort_order", "user")
     )
     context = {
         "officers": officers,
@@ -88,7 +88,9 @@ def hspc(request):
 
 def user_page(request, user):
     user = User.objects.get(username=user)
+    events_attended = user.events_attended.order_by("-start")
+    badges = user.badges.all()
     if not user:
         raise Http404()
-    context = {"user": user}
+    context = {"user": user, "events_attended": events_attended, "badges": badges}
     return render(request, "user_page.html", context)
