@@ -1,0 +1,21 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load markdown %}
+
+{% block content %}
+	<h1>{{ user.first_name }} {{ user.last_name }}</h1>
+    {% if user.image %}
+    <img src="{{ user.image.url }}" class="w-25" style="object-fit: cover; aspect-ratio: 1/1;"
+         alt="Image of {{ user.first_name }} {{ user.last_name }}">
+    {% else %}
+    <img src="{% static 'acm.png' %}" class="w-25" style="object-fit: cover; aspect-ratio: 1/1;"
+         alt="Image of {{ user.first_name }} {{ user.last_name }}">
+    {% endif %}
+    <p>{{ user.bio | markdown | remove_p_tags | safe }}</p>
+    <div>
+    {% for badge in user.badges.all %}
+        {% include 'badge.html' with badge=badge %}
+    {% endfor %}
+    <p><strong>Account created:</strong> {{ user.date_joined }}</p>
+    </div>
+{% endblock %}

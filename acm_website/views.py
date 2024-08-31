@@ -2,7 +2,7 @@ from django.http import Http404
 from django.shortcuts import render
 from django.utils import timezone
 
-from acm_website.models import Officer, Event, CarouselImage, HSPCContest
+from acm_website.models import Officer, Event, CarouselImage, HSPCContest, User
 from acm_website.settings import VENMO_LINK, ZELLE_LINK
 
 
@@ -84,3 +84,13 @@ def hspc(request):
     past_sets = HSPCContest.objects.all().order_by("-year")
     context = {"past_sets": past_sets}
     return render(request, "hspc.html", context)
+
+
+def user_page(request, user):
+    user = User.objects.get(username=user)
+    if not user:
+        raise Http404()
+    context = {
+        "user": user
+    }
+    return render(request, "user_page.html", context)

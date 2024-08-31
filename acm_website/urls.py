@@ -30,6 +30,7 @@ urlpatterns = (
         path("icpc/", views.icpc, name="icpc"),
         path("donate/", views.donate, name="donate"),
         path("hspc/", views.hspc, name="hspc"),
+        path("users/<str:user>", views.user_page, name="user_page"),
     ]
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 )

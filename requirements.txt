@@ -10,6 +10,8 @@ django-bootstrap5~=24.2
 django-crispy-forms~=2.3
 # Web server
 gunicorn~=22.0.0
+# IPython interactive shell
+ipython~=8.27.0
 # Markdown parser
 mistune~=3.0.2
 # Code syntax highlighting
