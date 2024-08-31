@@ -142,6 +142,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "staticfiles/"),)
 
+AUTH_USER_MODEL = "acm_website.User"
+
 # DO NOT PUT THIS INFORMATION HERE! PUT IT IN SECRET.PY!
 VENMO_LINK = ""
 ZELLE_LINK = ""

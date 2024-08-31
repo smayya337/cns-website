@@ -1,5 +1,48 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
+
+
+class Event(models.Model):
+    name = models.CharField(
+        max_length=30, null=False, blank=False, help_text="Event name"
+    )
+    start = models.DateTimeField(
+        default=timezone.now, help_text="Event start date and time"
+    )
+    end = models.DateTimeField(
+        null=True, blank=True, help_text="Optional event end date and time"
+    )
+    location = models.CharField(
+        max_length=30, null=False, blank=False, help_text="Event location"
+    )
+    description = models.TextField(
+        null=False, blank=True, default="", help_text="Optional event description"
+    )
+    image = models.ImageField(
+        upload_to="events/", default="acm.png", help_text="Event image"
+    )
+
+    def __str__(self):
+        date_string = f"{self.start}"
+        if self.end:
+            date_string += f" - {self.end}"
+        return f"{self.name}: {date_string} at {self.location}"
+
+
+class Badge(models.Model):
+    name = models.CharField(
+        max_length=30, null=False, blank=False, unique=True, help_text="Badge name"
+    )
+    description = models.TextField(null=False, blank=True, help_text="Badge description (Markdown is supported)")
+
+    def __str__(self):
+        return self.name
+
+
+class User(AbstractUser):
+    badges = models.ManyToManyField(Badge)
+    events_attended = models.ManyToManyField(Event)
 
 
 class Officer(models.Model):
@@ -37,33 +80,6 @@ class Officer(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.year}-{self.year + 1} {self.position})"
-
-
-class Event(models.Model):
-    name = models.CharField(
-        max_length=30, null=False, blank=False, help_text="Event name"
-    )
-    start = models.DateTimeField(
-        default=timezone.now, help_text="Event start date and time"
-    )
-    end = models.DateTimeField(
-        null=True, blank=True, help_text="Optional event end date and time"
-    )
-    location = models.CharField(
-        max_length=30, null=False, blank=False, help_text="Event location"
-    )
-    description = models.TextField(
-        null=False, blank=True, default="", help_text="Optional event description"
-    )
-    image = models.ImageField(
-        upload_to="events/", default="acm.png", help_text="Event image"
-    )
-
-    def __str__(self):
-        date_string = f"{self.start}"
-        if self.end:
-            date_string += f" - {self.end}"
-        return f"{self.name}: {date_string} at {self.location}"
 
 
 class CarouselImage(models.Model):

@@ -13,7 +13,10 @@ def index(request):
 
 
 def about(request):
-    year = Officer.objects.order_by("-year")[0].year
+    try:
+        year = Officer.objects.order_by("-year")[0].year
+    except IndexError:
+        year = timezone.now().year
     past_years = sorted(
         list({o.year for o in Officer.objects.all() if o.year < year}), reverse=True
     )
