@@ -35,6 +35,22 @@ class Badge(models.Model):
         max_length=30, null=False, blank=False, unique=True, help_text="Badge name"
     )
     description = models.TextField(null=False, blank=True, help_text="Badge description (Markdown is supported)")
+    color = models.CharField(max_length=16, null=False, blank=False, help_text="Badge color", choices=[
+        ("blue", "Blue"),
+        ("indigo", "Indigo"),
+        ("purple", "Purple"),
+        ("pink", "Pink"),
+        ("red", "Red"),
+        ("orange", "Orange"),
+        ("yellow", "Yellow"),
+        ("green", "Green"),
+        ("teal", "Teal"),
+        ("cyan", "Cyan"),
+        ("black", "Black"),
+        ("white", "White"),
+        ("gray", "Gray"),
+        ("gray-dark", "Dark Gray"),
+    ], default="blue")
 
     def __str__(self):
         return self.name
