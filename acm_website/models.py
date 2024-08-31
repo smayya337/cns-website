@@ -58,8 +58,8 @@ class Badge(models.Model):
 
 
 class User(AbstractUser):
-    badges = models.ManyToManyField(Badge)
-    events_attended = models.ManyToManyField(Event)
+    badges = models.ManyToManyField(Badge, blank=True)
+    events_attended = models.ManyToManyField(Event, blank=True)
     image = models.ImageField(
         upload_to=f"users/", blank=True, help_text="A photo of the user", null=True, default=""
     )
