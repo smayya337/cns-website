@@ -90,7 +90,5 @@ def user_page(request, user):
     user = User.objects.get(username=user)
     if not user:
         raise Http404()
-    context = {
-        "user": user
-    }
+    context = {"user": user}
     return render(request, "user_page.html", context)

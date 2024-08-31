@@ -35,23 +35,32 @@ class Badge(models.Model):
     name = models.CharField(
         max_length=30, null=False, blank=False, unique=True, help_text="Badge name"
     )
-    description = models.TextField(null=False, blank=True, help_text="Badge description (Markdown is supported)")
-    color = models.CharField(max_length=16, null=False, blank=False, help_text="Badge color", choices=[
-        ("blue", "Blue"),
-        ("indigo", "Indigo"),
-        ("purple", "Purple"),
-        ("pink", "Pink"),
-        ("red", "Red"),
-        ("orange", "Orange"),
-        ("yellow", "Yellow"),
-        ("green", "Green"),
-        ("teal", "Teal"),
-        ("cyan", "Cyan"),
-        ("black", "Black"),
-        ("white", "White"),
-        ("gray", "Gray"),
-        ("gray-dark", "Dark Gray"),
-    ], default="blue")
+    description = models.TextField(
+        null=False, blank=True, help_text="Badge description (Markdown is supported)"
+    )
+    color = models.CharField(
+        max_length=16,
+        null=False,
+        blank=False,
+        help_text="Badge color",
+        choices=[
+            ("blue", "Blue"),
+            ("indigo", "Indigo"),
+            ("purple", "Purple"),
+            ("pink", "Pink"),
+            ("red", "Red"),
+            ("orange", "Orange"),
+            ("yellow", "Yellow"),
+            ("green", "Green"),
+            ("teal", "Teal"),
+            ("cyan", "Cyan"),
+            ("black", "Black"),
+            ("white", "White"),
+            ("gray", "Gray"),
+            ("gray-dark", "Dark Gray"),
+        ],
+        default="blue",
+    )
 
     def __str__(self):
         return self.name
@@ -61,7 +70,11 @@ class User(AbstractUser):
     badges = models.ManyToManyField(Badge, blank=True)
     events_attended = models.ManyToManyField(Event, blank=True)
     image = models.ImageField(
-        upload_to=f"users/", blank=True, help_text="A photo of the user", null=True, default=""
+        upload_to=f"users/",
+        blank=True,
+        help_text="A photo of the user",
+        null=True,
+        default="",
     )
     bio = models.TextField(
         null=False, blank=True, help_text="User's biography (Markdown is supported)"
@@ -69,6 +82,7 @@ class User(AbstractUser):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.username})"
+
 
 class Officer(models.Model):
     # first_name = models.CharField(
