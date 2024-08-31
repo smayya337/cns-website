@@ -3,5 +3,7 @@
         <div {% if not forloop.last %} class="mb-3" {% endif %}>
             {% include "event_card.html" %}
         </div>
+    {% empty %}
+        <p class="m-0 text-center text-muted">Sorry, there are no upcoming events!</p>
     {% endfor %}
 </div>
