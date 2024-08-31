@@ -1,7 +1,9 @@
 # Code formatter
 black~=24.4.2
 # Django
-Django~=5.0.7
+Django~=4.2.14
+# Handy Django helpers
+django-annoying~=0.10.7
 # Bootstrap for Django
 django-bootstrap5~=24.2
 # Helps with forms

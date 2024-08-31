@@ -1,3 +1,4 @@
+from annoying.fields import AutoOneToOneField
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
@@ -59,21 +60,29 @@ class Badge(models.Model):
 class User(AbstractUser):
     badges = models.ManyToManyField(Badge)
     events_attended = models.ManyToManyField(Event)
+    image = models.ImageField(
+        upload_to=f"users/", blank=True, help_text="A photo of the user", null=True, default=""
+    )
+    bio = models.TextField(
+        null=False, blank=True, help_text="User's biography (Markdown is supported)"
+    )
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} ({self.username})"
 
 class Officer(models.Model):
-    first_name = models.CharField(
-        max_length=30, null=False, blank=False, help_text="First name"
-    )
-    last_name = models.CharField(
-        max_length=30, null=False, blank=False, help_text="Last name"
-    )
+    # first_name = models.CharField(
+    #     max_length=30, null=False, blank=False, help_text="First name"
+    # )
+    # last_name = models.CharField(
+    #     max_length=30, null=False, blank=False, help_text="Last name"
+    # )
     position = models.CharField(
         max_length=30, null=False, blank=False, help_text="Position"
     )
-    bio = models.TextField(
-        null=False, blank=True, help_text="Officer's biography (Markdown is supported)"
-    )
+    # bio = models.TextField(
+    #     null=False, blank=True, help_text="Officer's biography (Markdown is supported)"
+    # )
     sort_order = models.IntegerField(
         default=0, help_text="Optional sort order of officer"
     )
@@ -89,13 +98,14 @@ class Officer(models.Model):
         default=False,
         help_text="Whether this person is a faculty advisor",
     )
-    email = models.EmailField(null=False, blank=False, help_text="UVA email address")
-    image = models.ImageField(
-        upload_to=f"officers/", blank=True, help_text="A photo of the officer"
-    )
+    # email = models.EmailField(null=False, blank=False, help_text="UVA email address")
+    # image = models.ImageField(
+    #     upload_to=f"officers/", blank=True, help_text="A photo of the officer"
+    # )
+    user = AutoOneToOneField(User, on_delete=models.CASCADE, null=True, default=None)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} ({self.year}-{self.year + 1} {self.position})"
+        return f"{self.user.first_name} {self.user.last_name} ({self.year}-{self.year + 1} {self.position})"
 
 
 class CarouselImage(models.Model):

@@ -26,12 +26,12 @@ def about(request):
     officers = (
         Officer.objects.filter(year=year)
         .filter(faculty_advisor=False)
-        .order_by("sort_order", "first_name", "last_name")
+        .order_by("sort_order", "user")
     )
     advisors = (
         Officer.objects.filter(year=year)
         .filter(faculty_advisor=True)
-        .order_by("sort_order", "first_name", "last_name")
+        .order_by("sort_order", "user")
     )
     context = {
         "officers": officers,
