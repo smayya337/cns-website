@@ -147,6 +147,7 @@ AUTH_USER_MODEL = "acm_website.User"
 # DO NOT PUT THIS INFORMATION HERE! PUT IT IN SECRET.PY!
 VENMO_LINK = ""
 ZELLE_LINK = ""
+USERS_TO_HIDE = []
 
 try:
     from .secret import *

@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.utils import timezone
 
 from acm_website.models import Officer, Event, CarouselImage, HSPCContest, User
-from acm_website.settings import VENMO_LINK, ZELLE_LINK
+from acm_website.settings import VENMO_LINK, ZELLE_LINK, USERS_TO_HIDE
 
 
 def index(request):
@@ -87,6 +87,8 @@ def hspc(request):
 
 
 def user_page(request, user):
+    if user in USERS_TO_HIDE:
+        raise Http404()
     user = User.objects.get(username=user)
     events_attended = user.events_attended.order_by("-start")
     badges = user.badges.all()
