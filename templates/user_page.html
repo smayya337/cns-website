@@ -10,7 +10,7 @@
         <div class="flex-grow-1 ps-5">
             <div class="d-flex flex-row">
                 <h1 class="me-4">{{ user.first_name }} {{ user.last_name }}</h1>
-                <a href="mailto:{{ user.username }}@virginia.edu" title="Email {{ user.first_name }} {{ user.last_name }}" class="p-2 rounded-circle border border-1 my-auto"><i class="bi bi-envelope text-muted"></i></a>
+                <a href="mailto:{{ user.email }}" title="Email {{ user.first_name }} {{ user.last_name }}" class="p-2 rounded-circle border border-1 my-auto"><i class="bi bi-envelope text-muted"></i></a>
             </div>
             <p>{{ user.bio | markdown | remove_p_tags | safe }}</p>
         </div>
