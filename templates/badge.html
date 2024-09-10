@@ -1,2 +1,7 @@
-{# TODO: badge color from database, tooltip #}
-<span class="badge text-bg-primary">{{ badge.name }}</span>
+{% load markdown %}
+{# TODO: badge color from database #}
+{% if badge.description %}
+    <span class="badge text-bg-primary" style="font-size: 1rem;" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="{{ badge.description | markdown | remove_p_tags | safe }}">{{ badge.name }}</span>
+{% else %}
+    <span class="badge text-bg-primary" style="font-size: 1rem;">{{ badge.name }}</span>
+{% endif %}
