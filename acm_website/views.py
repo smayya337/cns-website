@@ -105,8 +105,23 @@ def event_page(request, event):
     event = Event.objects.get(pk=event)
     attendees = event.user_set.filter(hide=False)
     event_happened = timezone.now() >= event.start
-    context = {"event": event, "attendees": attendees, "event_happened": event_happened}
-    return render(request, "event_page.html", context)
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            if request.user in attendees:
+                event.user_set.remove(request.user)
+                event.save()
+                return redirect("event_page", event.pk)
+                # TODO: toast
+            else:
+                event.user_set.add(request.user)
+                event.save()
+                return redirect("event_page", event.pk)
+                # TODO: toast
+        else:
+            return redirect("event_page", event.pk)  # TODO: toast
+    else:
+        context = {"event": event, "attendees": attendees, "event_happened": event_happened}
+        return render(request, "event_page.html", context)
 
 def logout_page(request):
     logout(request)

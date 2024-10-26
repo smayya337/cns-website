@@ -20,6 +20,24 @@
             <p class="mb-1 text-muted"><strong>Where: </strong>{{ event.location }}</p>
             <p>{{ event.description }}</p>
             {# TODO: add an "I'll be there!"/"I was there!" button if there is a logged-in user #}
+            {% if request.user.is_authenticated %}
+                <form action="{{ request.url }}" method="post">
+                        {% csrf_token %}
+                        {% if request.user in attendees %}
+                            {% if event_happened %}
+                                <input class="btn btn-danger" type="submit" value="I didn't attend!">
+                            {% else %}
+                                <input class="btn btn-danger" type="submit" value="I'm not attending!">
+                            {% endif %}
+                        {% else %}
+                            {% if event_happened %}
+                                <input class="btn btn-primary" type="submit" value="I attended!">
+                            {% else %}
+                                <input class="btn btn-primary" type="submit" value="I'm attending!">
+                            {% endif %}
+                        {% endif %}
+                    </form>
+            {% endif %}
         </div>
     </div>
     {% if attendees %}
