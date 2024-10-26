@@ -1,7 +1,8 @@
 {% load markdown %}
 
 {% if badge.description %}
-    <span class="badge text-bg-{{ badge.color }}" style="font-size: 1rem;" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="{{ badge.description }}">{{ badge.name }}</span>
+    {#  For whatever reason, the tooltip renders in the correct position for every `data-bs-placement` except `top`, which is the one I want...  #}
+    <span class="badge text-bg-{{ badge.color }}" style="font-size: 1rem;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ badge.description }}">{{ badge.name }}</span>
 {% else %}
     <span class="badge text-bg-{{ badge.color }}" style="font-size: 1rem;">{{ badge.name }}</span>
 {% endif %}
