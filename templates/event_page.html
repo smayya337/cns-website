@@ -1,0 +1,41 @@
+{% extends "_base.html" %}
+
+{% load markdown %}
+
+{% block content %}
+    <div class="d-flex flex-row">
+{#  TODO: event image  #}
+        <div class="h-25 flex-shrink-1">
+            <img src="{{ event.image.url }}" class="border border-3"
+                 style="object-fit: cover; width: 15vw;"
+                 alt="Image for event {{ evt.name }}">
+        </div>
+        <div class="flex-grow-1 ps-5 w-100">
+            <h1 class="me-4">{{ event.name }}</h1>
+            {% if evt.end %}
+                <p class="mb-1 text-muted"><strong>When: </strong>{{ event.start }} - {{ event.end }}</p>
+            {% else %}
+                <p class="mb-1 text-muted"><strong>When: </strong>{{ event.start }}</p>
+            {% endif %}
+            <p class="mb-1 text-muted"><strong>Where: </strong>{{ event.location }}</p>
+            <p>{{ event.description }}</p>
+            {# TODO: add an "I'll be there!"/"I was there!" button if there is a logged-in user #}
+        </div>
+    </div>
+    {% if attendees %}
+        <div class="pt-3">
+        {% if event_happened %}
+            <h2>Who Attended</h2>
+        {% else %}
+            <h2>Who's Attending</h2>
+        {% endif %}
+        <div class="d-flex flex-row">
+            {% for attendee in attendees %}
+                <a href="{% url 'user_page' attendee.username %}" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="{{ attendee.first_name }} {{ attendee.last_name }}" style="width: 5vw;">
+                    {% include "profile_image.html" with user=attendee %}
+                </a>
+            {% endfor %}
+        </div>
+        </div>
+    {% endif %}
+{% endblock %}

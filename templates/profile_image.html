@@ -2,7 +2,7 @@
 
 {% if user.image %}
     <img src="{{ user.image.url }}" class="rounded-circle border border-3"
-         style="object-fit: cover; aspect-ratio: 1/1; width: 15vw;"
+         style="object-fit: cover; aspect-ratio: 1/1; width: 100%;"
          alt="Image of {{ user.first_name }} {{ user.last_name }}">
 {% else %}
     <div class="rounded-circle border border-3 d-flex"

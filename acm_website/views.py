@@ -18,7 +18,7 @@ def about(request):
     except IndexError:
         year = timezone.now().year
     past_years = sorted(
-        list({o.year for o in Officer.objects.all() if o.year < year}), reverse=True
+        list({o.year for o in Officer.objects.exclude(user__username__in=USERS_TO_HIDE) if o.year < year}), reverse=True
     )
     past_year_links = [
         {"year": f"{py}-{py + 1}", "link": f"/about/{py}"} for py in past_years
@@ -26,11 +26,13 @@ def about(request):
     officers = (
         Officer.objects.filter(year=year)
         .filter(faculty_advisor=False)
+        .exclude(user__username__in=USERS_TO_HIDE)
         .order_by("sort_order", "user")
     )
     advisors = (
         Officer.objects.filter(year=year)
         .filter(faculty_advisor=True)
+        .exclude(user__username__in=USERS_TO_HIDE)
         .order_by("sort_order", "user")
     )
     context = {
@@ -54,11 +56,13 @@ def past_officers(request, year=timezone.now().year):
     officers = (
         Officer.objects.filter(year=year)
         .filter(faculty_advisor=False)
+        .exclude(user__username__in=USERS_TO_HIDE)
         .order_by("sort_order", "user")
     )
     advisors = (
         Officer.objects.filter(year=year)
         .filter(faculty_advisor=True)
+        .exclude(user__username__in=USERS_TO_HIDE)
         .order_by("sort_order", "user")
     )
     context = {
@@ -90,9 +94,17 @@ def user_page(request, user):
     if user in USERS_TO_HIDE:
         raise Http404()
     user = User.objects.get(username=user)
-    events_attended = user.events_attended.order_by("-start")
-    badges = user.badges.all()
     if not user:
         raise Http404()
+    events_attended = user.events_attended.order_by("-start")
+    badges = user.badges.all()
     context = {"user": user, "events_attended": events_attended, "badges": badges}
     return render(request, "user_page.html", context)
+
+
+def event_page(request, event):
+    event = Event.objects.get(pk=event)
+    attendees = event.user_set.exclude(username__in=USERS_TO_HIDE)
+    event_happened = timezone.now() >= event.start
+    context = {"event": event, "attendees": attendees, "event_happened": event_happened}
+    return render(request, "event_page.html", context)

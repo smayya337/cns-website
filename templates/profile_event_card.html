@@ -1,7 +1,8 @@
 {% load static %}
 {% load markdown %}
 
-<div class="card h-100">
+<a href="{% url 'event_page' evt.pk %}" class="text-decoration-none">
+    <div class="card h-100">
     {% if evt.image %}
     <img src="{{ evt.image.url }}" class="card-img-top" style="object-fit: cover; aspect-ratio: 1/1;"
          alt="Image for event {{ evt.name }}">
@@ -13,3 +14,4 @@
         <h5 class="card-title event-card-title">{{ evt.name }}</h5>
     </div>
 </div>
+</a>

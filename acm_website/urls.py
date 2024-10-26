@@ -30,4 +30,5 @@ urlpatterns = [
     path("donate/", views.donate, name="donate"),
     path("hspc/", views.hspc, name="hspc"),
     path("users/<str:user>/", views.user_page, name="user_page"),
+    path("events/<int:event>/", views.event_page, name="event_page"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
