@@ -12,10 +12,8 @@
     <div class="card-body">
         <h5 class="card-title officer-card-title">{{ officer.user.first_name }} {{ officer.user.last_name }}</h5>
         <h6 class="card-subtitle mb-2 text-muted officer-card-subtitle">{{ officer.position }}</h6>
-{#        <p class="card-text">{{ officer.user.bio | markdown | remove_p_tags | safe }}</p>#}
     </div>
     <div class="card-footer">
         <a href="/users/{{ officer.user.username }}" class="btn btn-primary pt-auto">Profile</a>
-{#        <a href="mailto:{{ officer.user.email }}" class="btn btn-primary pt-auto">Email</a>#}
     </div>
 </div>
