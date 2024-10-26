@@ -22,7 +22,8 @@
 <body class="min-vh-100 d-flex flex-column">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid align-baseline">
-        <a class="navbar-brand" href="/"><img src="{% static 'acm.svg' %}" style="height: 2rem;" class="me-1" alt="ACM @ UVA Logo"/> <strong>ACM @ UVA</strong></a>
+        <a class="navbar-brand" href="/"><img src="{% static 'acm.svg' %}" style="height: 2rem;" class="me-1"
+                                              alt="ACM @ UVA Logo"/> <strong>ACM @ UVA</strong></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -30,10 +31,27 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 {% for link in links %}
-                	<a class="nav-link align-baseline" href="{{ link.url }}">{{ link.label }}</a>
+                    <a class="nav-link align-baseline" href="{{ link.url }}">{{ link.label }}</a>
                 {% endfor %}
             </div>
         </div>
+        {% if request.user %}
+            <div class="dropdown">
+            <p class="navbar-text dropdown-toggle mb-0" id="dropdownMenuLink" data-bs-toggle="dropdown" style="color: var(--bs-navbar-color)">
+                {% if request.user.first_name %}
+                    {{ request.user.first_name }}
+                {% else %}
+                    {{ request.user.username }}
+                {% endif %}
+            </p>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+                {% if not request.user.hide %}
+                	<li><a class="dropdown-item w-0" href="{% url 'user_page' request.user.username %}">Profile</a></li>
+                {% endif %}
+                <li><a class="dropdown-item w-0" href="/">Log out</a></li>
+          </ul>
+            </div>
+        {% endif %}
     </div>
 </nav>
 <div class="container flex-grow-1 py-4">

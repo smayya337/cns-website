@@ -9,7 +9,7 @@ class UserAdmin(BaseUserAdmin):
         (None, {"fields": ("username", "password")}),
         (
             _("Personal info"),
-            {"fields": ("first_name", "last_name", "email", "bio", "image")},
+            {"fields": ("first_name", "last_name", "email", "bio", "image", "hide")},
         ),
         (_("ACM status"), {"fields": ("events_attended", "badges")}),
         (

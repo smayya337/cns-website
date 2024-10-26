@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.utils import timezone
 
 from acm_website.models import Officer, Event, CarouselImage, HSPCContest, User
-from acm_website.settings import VENMO_LINK, ZELLE_LINK, USERS_TO_HIDE
+from acm_website.settings import VENMO_LINK, ZELLE_LINK
 
 
 def index(request):
@@ -18,7 +18,7 @@ def about(request):
     except IndexError:
         year = timezone.now().year
     past_years = sorted(
-        list({o.year for o in Officer.objects.exclude(user__username__in=USERS_TO_HIDE) if o.year < year}), reverse=True
+        list({o.year for o in Officer.objects.filter(user__hide=False) if o.year < year}), reverse=True
     )
     past_year_links = [
         {"year": f"{py}-{py + 1}", "link": f"/about/{py}"} for py in past_years
@@ -26,13 +26,13 @@ def about(request):
     officers = (
         Officer.objects.filter(year=year)
         .filter(faculty_advisor=False)
-        .exclude(user__username__in=USERS_TO_HIDE)
+        .filter(user__hide=False)
         .order_by("sort_order", "user")
     )
     advisors = (
         Officer.objects.filter(year=year)
         .filter(faculty_advisor=True)
-        .exclude(user__username__in=USERS_TO_HIDE)
+        .filter(user__hide=False)
         .order_by("sort_order", "user")
     )
     context = {
@@ -56,13 +56,13 @@ def past_officers(request, year=timezone.now().year):
     officers = (
         Officer.objects.filter(year=year)
         .filter(faculty_advisor=False)
-        .exclude(user__username__in=USERS_TO_HIDE)
+        .filter(user__hide=False)
         .order_by("sort_order", "user")
     )
     advisors = (
         Officer.objects.filter(year=year)
         .filter(faculty_advisor=True)
-        .exclude(user__username__in=USERS_TO_HIDE)
+        .filter(user__hide=False)
         .order_by("sort_order", "user")
     )
     context = {
@@ -91,10 +91,8 @@ def hspc(request):
 
 
 def user_page(request, user):
-    if user in USERS_TO_HIDE:
-        raise Http404()
     user = User.objects.get(username=user)
-    if not user:
+    if not user or user.hide:
         raise Http404()
     events_attended = user.events_attended.order_by("-start")
     badges = user.badges.all()
@@ -104,7 +102,7 @@ def user_page(request, user):
 
 def event_page(request, event):
     event = Event.objects.get(pk=event)
-    attendees = event.user_set.exclude(username__in=USERS_TO_HIDE)
+    attendees = event.user_set.filter(hide=False)
     event_happened = timezone.now() >= event.start
     context = {"event": event, "attendees": attendees, "event_happened": event_happened}
     return render(request, "event_page.html", context)

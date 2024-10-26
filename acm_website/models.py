@@ -79,6 +79,7 @@ class User(AbstractUser):
     bio = models.TextField(
         null=False, blank=True, help_text="User's biography (Markdown is supported)"
     )
+    hide = models.BooleanField(default=False, help_text="Hide this user")
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.username})"
