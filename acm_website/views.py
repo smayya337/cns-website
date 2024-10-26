@@ -1,11 +1,10 @@
 from django.contrib.auth import logout, authenticate, login
-from django.contrib.auth.views import redirect_to_login
 from django.contrib import messages
-from django.http import Http404
+from django.http import Http404, HttpResponseBadRequest
 from django.shortcuts import render, redirect
 from django.utils import timezone
 
-from acm_website.forms import LoginForm
+from acm_website.forms import LoginForm, ProfileForm
 from acm_website.models import Officer, Event, CarouselImage, HSPCContest, User
 from acm_website.settings import VENMO_LINK, ZELLE_LINK
 
@@ -99,12 +98,40 @@ def hspc(request):
 
 def user_page(request, username):
     user = User.objects.get(username=username)
-    if not user or user.hide:
-        raise Http404()
-    events_attended = user.events_attended.order_by("-start")
-    badges = user.badges.all()
-    context = {"req_user": user, "events_attended": events_attended, "badges": badges}
-    return render(request, "user_page.html", context)
+    if request.method == "POST":
+        if not user or user.hide:
+            return HttpResponseBadRequest()
+        if request.user.is_authenticated:
+            if request.user.username == username:
+                form = ProfileForm(request.POST, request.FILES)
+                if form.is_valid():
+                    if form.cleaned_data["image"]:
+                        user.image = form.cleaned_data["image"]
+                    elif form.cleaned_data["image"] is False:
+                        user.image = ""
+                    user.bio = form.cleaned_data["bio"]
+                    user.save()
+                    messages.add_message(request, messages.SUCCESS, "Your profile has been updated!")
+                    return redirect(request.path)
+                else:
+                    messages.add_message(request, messages.ERROR, "Unable to update profile! Try again.")
+                    return redirect(request.path)
+            else:
+                messages.add_message(request, messages.ERROR, "You are not authorized to update this profile!")
+                return redirect(request.path)
+        else:
+            messages.add_message(request, messages.ERROR, "You are not authorized to update this profile!")
+            return redirect(request.path)
+    else:
+        if not user or user.hide:
+            raise Http404()
+        events_attended = user.events_attended.order_by("-start")
+        badges = user.badges.all()
+        form = ProfileForm()
+        form.fields["image"].initial = user.image
+        form.fields["bio"].initial = user.bio
+        context = {"req_user": user, "events_attended": events_attended, "badges": badges, "form": form}
+        return render(request, "user_page.html", context)
 
 
 def event_page(request, event):

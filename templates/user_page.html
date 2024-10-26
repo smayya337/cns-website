@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% load crispy_forms_filters %}
 
 {% load markdown %}
 
@@ -15,6 +16,13 @@
                    class="p-2 rounded-circle border border-1 my-auto"><i class="bi bi-envelope text-muted"></i></a>
             </div>
             {{ req_user.bio | markdown | safe }}
+            {% if request.user.is_authenticated and request.user.username == req_user.username %}
+                <!-- Button trigger modal -->
+                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#profileModal">
+                Edit profile
+                <i class="bi bi-pencil-fill ms-1"></i>
+                </button>
+            {% endif %}
         </div>
     </div>
     {% if badges %}
@@ -37,4 +45,24 @@
             </div>
         </div>
     {% endif %}
+
+    <!-- Modal -->
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <form class="modal-content" method="POST" action="{% url 'user_page' username=req_user.username %}" enctype="multipart/form-data">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="profileModalLabel">Edit Profile</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            {% csrf_token %}
+            {{ form|crispy }}
+          </div>
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="Save changes">
+          </div>
+        </form>
+      </div>
+    </div>
+
 {% endblock %}
