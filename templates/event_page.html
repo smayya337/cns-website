@@ -48,7 +48,7 @@
             <div class="d-flex flex-row">
                 {# TODO: make these images more mobile-friendly #}
                 {% for attendee in attendees %}
-                    <a href="{% url 'user_page' attendee.username %}" data-bs-toggle="tooltip" data-bs-html="true"
+                    <a href="{% url 'user_page' attendee.username %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
                        data-bs-title="{{ attendee.first_name }} {{ attendee.last_name }}" style="width: 5vw;">
                         {% include "profile_image.html" with req_user=attendee %}
                     </a>
