@@ -167,3 +167,11 @@ def login_page(request):
         form.fields["next"].initial = nxt
         context = {"nxt": nxt, "form": form}
         return render(request, "login_page.html", context)
+
+
+# Horrendously hacky, I know
+def redirect_media_to_static(request):
+    path = request.path
+    path = path.removeprefix("/media")
+    path = "/static" + path
+    return redirect(path)
