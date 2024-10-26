@@ -35,10 +35,10 @@
                 {% endfor %}
             </div>
         </div>
-        {% if request.user %}
+        {% if request.user.is_authenticated %}
             <div class="dropdown">
-            <p class="navbar-text dropdown-toggle mb-0" id="dropdownMenuLink" data-bs-toggle="dropdown" style="color: var(--bs-navbar-color)">
-                {% if request.user.first_name %}
+            <p class="navbar-text dropdown-toggle mb-0" id="dropdownMenuLink" data-bs-toggle="dropdown">
+                {% if request.user.first_name %}                                                                                                                                                                        
                     {{ request.user.first_name }}
                 {% else %}
                     {{ request.user.username }}
@@ -48,7 +48,7 @@
                 {% if not request.user.hide %}
                 	<li><a class="dropdown-item w-0" href="{% url 'user_page' request.user.username %}">Profile</a></li>
                 {% endif %}
-                <li><a class="dropdown-item w-0" href="/">Log out</a></li>
+                <li><a class="dropdown-item w-0" href="{% url 'logout_page' %}">Log out</a></li>
           </ul>
             </div>
         {% endif %}

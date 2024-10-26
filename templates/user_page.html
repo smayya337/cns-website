@@ -9,11 +9,11 @@
         </div>
         <div class="flex-grow-1 ps-5">
             <div class="d-flex flex-row">
-                <h1 class="me-4">{{ user.first_name }} {{ user.last_name }}</h1>
-                <a href="mailto:{{ user.email }}" title="Email {{ user.first_name }} {{ user.last_name }}"
+                <h1 class="me-4">{{ req_user.first_name }} {{ req_user.last_name }}</h1>
+                <a href="mailto:{{ req_user.email }}" title="Email {{ req_user.first_name }} {{ req_user.last_name }}"
                    class="p-2 rounded-circle border border-1 my-auto"><i class="bi bi-envelope text-muted"></i></a>
             </div>
-            {{ user.bio | markdown | safe }}
+            {{ req_user.bio | markdown | safe }}
         </div>
     </div>
     {% if badges %}

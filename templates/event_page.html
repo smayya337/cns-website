@@ -32,7 +32,7 @@
         <div class="d-flex flex-row">
             {% for attendee in attendees %}
                 <a href="{% url 'user_page' attendee.username %}" data-bs-toggle="tooltip" data-bs-html="true" data-bs-title="{{ attendee.first_name }} {{ attendee.last_name }}" style="width: 5vw;">
-                    {% include "profile_image.html" with user=attendee %}
+                    {% include "profile_image.html" with req_user=attendee %}
                 </a>
             {% endfor %}
         </div>

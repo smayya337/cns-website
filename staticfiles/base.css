@@ -3,6 +3,15 @@
   --bs-font-monospace: "IBM Plex Mono",SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace !important;
 }
 
+#dropdownMenuLink {
+  color: var(--bs-navbar-color);
+}
+
+#dropdownMenuLink:hover {
+  cursor: pointer;
+  color: var(--bs-navbar-hover-color);
+}
+
 .btn-blue {
   --bs-btn-color: #fff;
   --bs-btn-bg: #0d6efd;

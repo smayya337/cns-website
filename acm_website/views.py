@@ -1,5 +1,6 @@
+from django.contrib.auth import logout
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils import timezone
 
 from acm_website.models import Officer, Event, CarouselImage, HSPCContest, User
@@ -90,13 +91,13 @@ def hspc(request):
     return render(request, "hspc.html", context)
 
 
-def user_page(request, user):
-    user = User.objects.get(username=user)
+def user_page(request, username):
+    user = User.objects.get(username=username)
     if not user or user.hide:
         raise Http404()
     events_attended = user.events_attended.order_by("-start")
     badges = user.badges.all()
-    context = {"user": user, "events_attended": events_attended, "badges": badges}
+    context = {"req_user": user, "events_attended": events_attended, "badges": badges}
     return render(request, "user_page.html", context)
 
 
@@ -106,3 +107,7 @@ def event_page(request, event):
     event_happened = timezone.now() >= event.start
     context = {"event": event, "attendees": attendees, "event_happened": event_happened}
     return render(request, "event_page.html", context)
+
+def logout_page(request):
+    logout(request)
+    return redirect("index", permanent=True)
