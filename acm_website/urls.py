@@ -32,4 +32,5 @@ urlpatterns = [
     path("users/<str:username>/", views.user_page, name="user_page"),
     path("events/<int:event>/", views.event_page, name="event_page"),
     path("logout/", views.logout_page, name="logout_page"),
+    path("login/", views.login_page, name="login_page"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -12,6 +12,10 @@
   color: var(--bs-navbar-hover-color);
 }
 
+.asteriskField {
+    display: none;
+}
+
 .btn-blue {
   --bs-btn-color: #fff;
   --bs-btn-bg: #0d6efd;

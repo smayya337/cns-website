@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "acm_website",
     "django_bootstrap5",
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -143,6 +145,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "staticfiles/"),)
 
 AUTH_USER_MODEL = "acm_website.User"
+
+LOGIN_URL = "/login/"
 
 # DO NOT PUT THIS INFORMATION HERE! PUT IT IN SECRET.PY!
 VENMO_LINK = ""

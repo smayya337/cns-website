@@ -1,5 +1,7 @@
 # Code formatter
 black~=24.4.2
+# Form styling
+crispy-bootstrap5~=2024.10
 # Django
 Django~=4.2.14
 # Handy Django helpers

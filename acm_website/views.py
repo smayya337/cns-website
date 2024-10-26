@@ -1,8 +1,10 @@
-from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth.views import redirect_to_login
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.utils import timezone
 
+from acm_website.forms import LoginForm
 from acm_website.models import Officer, Event, CarouselImage, HSPCContest, User
 from acm_website.settings import VENMO_LINK, ZELLE_LINK
 
@@ -126,3 +128,21 @@ def event_page(request, event):
 def logout_page(request):
     logout(request)
     return redirect("index", permanent=True)
+
+def login_page(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        nxt = request.POST["next"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect(nxt, permanent=True)
+        else:
+            return redirect(f"/login?next={nxt}")
+    else:
+        nxt = request.GET.get("next", "/")
+        form = LoginForm()
+        form.fields["next"].initial = nxt
+        context = {"nxt": nxt, "form": form}
+        return render(request, "login_page.html", context)
