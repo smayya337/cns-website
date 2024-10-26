@@ -36,7 +36,7 @@ class Badge(models.Model):
         max_length=30, null=False, blank=False, unique=True, help_text="Badge name"
     )
     description = models.TextField(
-        null=False, blank=True, help_text="Badge description (Markdown is supported)"
+        null=False, blank=True, help_text="Badge description"
     )
     color = models.CharField(
         max_length=16,
