@@ -1,5 +1,6 @@
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.views import redirect_to_login
+from django.contrib import messages
 from django.http import Http404
 from django.shortcuts import render, redirect
 from django.utils import timezone
@@ -21,7 +22,10 @@ def about(request):
     except IndexError:
         year = timezone.now().year
     past_years = sorted(
-        list({o.year for o in Officer.objects.filter(user__hide=False) if o.year < year}), reverse=True
+        list(
+            {o.year for o in Officer.objects.filter(user__hide=False) if o.year < year}
+        ),
+        reverse=True,
     )
     past_year_links = [
         {"year": f"{py}-{py + 1}", "link": f"/about/{py}"} for py in past_years
@@ -111,23 +115,36 @@ def event_page(request, event):
         if request.user.is_authenticated:
             if request.user in attendees:
                 event.user_set.remove(request.user)
-                event.save()
-                return redirect("event_page", event.pk)
-                # TODO: toast
+                messages.add_message(
+                    request,
+                    messages.SUCCESS,
+                    "You've been removed from the attendees list for this event.",
+                )
             else:
                 event.user_set.add(request.user)
-                event.save()
-                return redirect("event_page", event.pk)
-                # TODO: toast
+                messages.add_message(
+                    request,
+                    messages.SUCCESS,
+                    "You've been added to the attendees list for this event.",
+                )
+            event.save()
         else:
-            return redirect("event_page", event.pk)  # TODO: toast
+            messages.add_message(request, messages.ERROR, "You're not signed in!")
+        return redirect("event_page", event.pk)
     else:
-        context = {"event": event, "attendees": attendees, "event_happened": event_happened}
+        context = {
+            "event": event,
+            "attendees": attendees,
+            "event_happened": event_happened,
+        }
         return render(request, "event_page.html", context)
+
 
 def logout_page(request):
     logout(request)
+    messages.add_message(request, messages.SUCCESS, "You have been logged out!")
     return redirect("index", permanent=True)
+
 
 def login_page(request):
     if request.method == "POST":
@@ -137,8 +154,12 @@ def login_page(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            messages.add_message(request, messages.SUCCESS, "You are now logged in!")
             return redirect(nxt, permanent=True)
         else:
+            messages.add_message(
+                request, messages.ERROR, "Invalid username or password!"
+            )
             return redirect(f"/login?next={nxt}")
     else:
         nxt = request.GET.get("next", "/")
