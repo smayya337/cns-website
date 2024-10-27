@@ -26,5 +26,5 @@ python ./manage.py collectstatic
 # create admin user
 python ./manage.py createsuperuser
 # start app
-gunicorn acm_website.wsgi
+gunicorn -b 0.0.0.0:8000 acm_website.wsgi
 ```
