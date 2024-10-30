@@ -48,10 +48,10 @@
                 </p>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
                     {% if not request.user.hide %}
-                        <li><a class="dropdown-item w-0" href="{% url 'user_page' request.user.username %}">Profile</a>
+                        <li><a class="dropdown-item w-0" href="{% url 'user_page' request.user.username %}"><i class="bi bi-person-fill me-2"></i>Profile</a>
                         </li>
                     {% endif %}
-                    <li><a class="dropdown-item w-0" href="{% url 'logout_page' %}">Log out</a></li>
+                    <li><a class="dropdown-item w-0" href="{% url 'logout_page' %}"><i class="bi bi-door-open-fill me-2"></i>Log out</a></li>
                 </ul>
             </div>
         {% else %}
