@@ -4,12 +4,12 @@
 {% load markdown %}
 
 {% block content %}
-    <div class="d-flex flex-row">
+    <div class="row gx-5 gy-3">
         {# TODO: make this image more mobile-friendly #}
-        <div class="flex-shrink-1" style="width: 15vw;">
+        <div class="col col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
             {% include "profile_image.html" %}
         </div>
-        <div class="flex-grow-1 ps-5">
+        <div class="col-auto">
             <div class="d-flex flex-row">
                 <h1 class="me-4">{{ req_user.first_name }} {{ req_user.last_name }}</h1>
                 <a href="mailto:{{ req_user.email }}" title="Email {{ req_user.first_name }} {{ req_user.last_name }}"
