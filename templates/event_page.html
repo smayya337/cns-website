@@ -3,13 +3,13 @@
 {% load markdown %}
 
 {% block content %}
-    <div class="d-flex flex-row">
-        <div class="h-25 flex-shrink-1">
-            <img src="{{ event.image.url }}" class="border border-3"
-                 style="object-fit: cover; width: 15vw;"
+    <div class="row gx-5 gy-3">
+        <div class="col col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <img src="{{ event.image.url }}" class="border border-3 h-100 w-100"
+                 style="object-fit: cover;"
                  alt="Image for event {{ event.name }}">
         </div>
-        <div class="flex-grow-1 ps-5 w-100">
+        <div class="col-auto">
             <h1 class="me-4">{{ event.name }}</h1>
             {% if evt.end %}
                 <p class="mb-1 text-muted"><strong>When: </strong>{{ event.start }} - {{ event.end }}</p>
@@ -45,15 +45,6 @@
             {% else %}
                 <h2>Who's Attending</h2>
             {% endif %}
-            <!-- <div class="d-flex flex-row">
-                {# TODO: make these images more mobile-friendly #}
-                {% for attendee in attendees %}
-                    <a href="{% url 'user_page' attendee.username %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                       data-bs-title="{{ attendee.first_name }} {{ attendee.last_name }}" style="width: 5vw;">
-                        {% include "profile_image.html" with req_user=attendee %}
-                    </a>
-                {% endfor %}
-            </div> -->
             <div class="row g-2">
                 {% for attendee in attendees %}
                     <a href="{% url 'user_page' attendee.username %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
