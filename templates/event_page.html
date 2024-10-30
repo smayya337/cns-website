@@ -45,11 +45,19 @@
             {% else %}
                 <h2>Who's Attending</h2>
             {% endif %}
-            <div class="d-flex flex-row">
+            <!-- <div class="d-flex flex-row">
                 {# TODO: make these images more mobile-friendly #}
                 {% for attendee in attendees %}
                     <a href="{% url 'user_page' attendee.username %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
                        data-bs-title="{{ attendee.first_name }} {{ attendee.last_name }}" style="width: 5vw;">
+                        {% include "profile_image.html" with req_user=attendee %}
+                    </a>
+                {% endfor %}
+            </div> -->
+            <div class="row g-2">
+                {% for attendee in attendees %}
+                    <a href="{% url 'user_page' attendee.username %}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                       data-bs-title="{{ attendee.first_name }} {{ attendee.last_name }}" class="col-2 col-lg-1">
                         {% include "profile_image.html" with req_user=attendee %}
                     </a>
                 {% endfor %}
