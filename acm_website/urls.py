@@ -31,7 +31,7 @@ urlpatterns = [
     path("hspc/", views.hspc, name="hspc"),
     path("users/<str:username>/", views.user_page, name="user_page"),
     path("events/<int:event>/", views.event_page, name="event_page"),
-    path("logout/", views.logout_page, name="logout_page"),
-    path("login/", views.login_page, name="login_page"),
+    path("accounts/logout/", views.logout_page, name="logout_page"),
+    path("accounts/login/", views.login_page, name="login_page"),
     path("media/acm.png", views.redirect_media_to_static)  # hack
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

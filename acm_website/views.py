@@ -187,7 +187,7 @@ def login_page(request):
             messages.add_message(
                 request, messages.ERROR, "Invalid username or password!"
             )
-            return redirect(f"/login?next={nxt}")
+            return redirect(f"{request.path}?next={nxt}")
     else:
         nxt = request.GET.get("next", "/")
         form = LoginForm()

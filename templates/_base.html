@@ -54,7 +54,7 @@
                 </ul>
             </div>
         {% else %}
-            <a class="text-decoration-none navbar-text" href="/login?next={{ request.path }}">Log in</a>
+            <a class="text-decoration-none navbar-text" href="{% url 'login_page' %}?next={{ request.path }}">Log in</a>
         {% endif %}
     </div>
 </nav>
