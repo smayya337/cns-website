@@ -111,16 +111,28 @@ def user_page(request, username):
                         user.image = ""
                     user.bio = form.cleaned_data["bio"]
                     user.save()
-                    messages.add_message(request, messages.SUCCESS, "Your profile has been updated!")
+                    messages.add_message(
+                        request, messages.SUCCESS, "Your profile has been updated!"
+                    )
                     return redirect(request.path)
                 else:
-                    messages.add_message(request, messages.ERROR, "Unable to update profile! Try again.")
+                    messages.add_message(
+                        request, messages.ERROR, "Unable to update profile! Try again."
+                    )
                     return redirect(request.path)
             else:
-                messages.add_message(request, messages.ERROR, "You are not authorized to update this profile!")
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    "You are not authorized to update this profile!",
+                )
                 return redirect(request.path)
         else:
-            messages.add_message(request, messages.ERROR, "You are not authorized to update this profile!")
+            messages.add_message(
+                request,
+                messages.ERROR,
+                "You are not authorized to update this profile!",
+            )
             return redirect(request.path)
     else:
         if not user or user.hide:
@@ -130,7 +142,12 @@ def user_page(request, username):
         form = ProfileForm()
         form.fields["image"].initial = user.image
         form.fields["bio"].initial = user.bio
-        context = {"req_user": user, "events_attended": events_attended, "badges": badges, "form": form}
+        context = {
+            "req_user": user,
+            "events_attended": events_attended,
+            "badges": badges,
+            "form": form,
+        }
         return render(request, "user_page.html", context)
 
 

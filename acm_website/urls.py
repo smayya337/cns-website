@@ -17,7 +17,7 @@ Including another URLconf
 
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from . import views, settings
 
 urlpatterns = [
@@ -33,5 +33,6 @@ urlpatterns = [
     path("events/<int:event>/", views.event_page, name="event_page"),
     path("accounts/logout/", views.logout_page, name="logout_page"),
     path("accounts/login/", views.login_page, name="login_page"),
-    path("media/acm.png", views.redirect_media_to_static)  # hack
+    path("media/acm.png", views.redirect_media_to_static),  # hack
+    path("accounts/", include("allauth.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

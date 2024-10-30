@@ -104,7 +104,9 @@ class Officer(models.Model):
         default=False,
         help_text="Whether this person is a faculty advisor",
     )
-    user = ForeignKey(User, related_name="officers", on_delete=models.CASCADE, null=True, default=None)
+    user = ForeignKey(
+        User, related_name="officers", on_delete=models.CASCADE, null=True, default=None
+    )
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name} ({self.year}-{self.year + 1} {self.position})"

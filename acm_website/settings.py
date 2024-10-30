@@ -30,6 +30,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "allauth",
+    "allauth.account",
+    # Optional -- requires install using `django-allauth[socialaccount]`.
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.saml",
     "whitenoise.runserver_nostatic",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -52,6 +57,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # Add the account middleware:
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "acm_website.urls"
@@ -146,7 +153,16 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "staticfiles/"),)
 
 AUTH_USER_MODEL = "acm_website.User"
 
-LOGIN_URL = "/login/"
+LOGIN_URL = "/accounts/login/"
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by email
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
+SOCIALACCOUNT_PROVIDERS = {}
 
 # DO NOT PUT THIS INFORMATION HERE! PUT IT IN SECRET.PY!
 VENMO_LINK = ""

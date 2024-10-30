@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+{% load socialaccount %}
 {% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
 
@@ -9,4 +10,6 @@
         {{ form|crispy }}
         <input class="btn btn-primary" type="submit" value="Log In">
     </form>
+    <h2>Log In With NetBadge</h2>
+    <a class="btn btn-primary" href="/accounts/saml/acm/login?next={{ nxt }}">NetBadge</a>
 {% endblock %}
