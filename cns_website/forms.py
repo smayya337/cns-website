@@ -15,5 +15,5 @@ class ProfileForm(forms.Form):
         required=False,
     )
     bio = forms.CharField(
-        label="Biography (Markdown is supported)", widget=forms.Textarea
+        label="Biography (Markdown is supported)", widget=forms.Textarea, required=False
     )
