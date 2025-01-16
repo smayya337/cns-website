@@ -140,26 +140,6 @@ class CarouselImage(models.Model):
         verbose_name_plural = "Carousel images"
 
 
-class HSPCContest(models.Model):
-    year = models.IntegerField(unique=True, default=timezone.now().year)
-    problem_set = models.FileField(
-        upload_to="hspc/problems/", null=False, blank=False, help_text="Problem set PDF"
-    )
-    judge_data = models.FileField(
-        upload_to="hspc/judge/",
-        null=False,
-        blank=False,
-        help_text="Judge input/output ZIP",
-    )
-
-    def __str__(self):
-        return f"{self.year}"
-
-    class Meta:
-        verbose_name = "HSPC contest"
-        verbose_name_plural = "HSPC contests"
-
-
 class NavBarLink(models.Model):
     url = models.CharField(
         max_length=150, null=False, blank=False, unique=True, help_text="Link to page"

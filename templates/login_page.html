@@ -10,6 +10,6 @@
         {{ form|crispy }}
         <input class="btn btn-primary" type="submit" value="Log In">
     </form>
-    <h2>Log In With NetBadge</h2>
-    <a class="btn btn-primary" href="/accounts/saml/acm/login?next={{ nxt }}">NetBadge</a>
+    <h2>Log In With CNS Single Sign-On</h2>
+    <a class="btn btn-primary" href="/accounts/saml/cns/login?next={{ nxt }}">CNS Single Sign-On</a>
 {% endblock %}
