@@ -4,5 +4,5 @@ static
 .venv
 db.sqlite3
 media
-acm_website/secret.py
+cns_website/secret.py
 __pycache__

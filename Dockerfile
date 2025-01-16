@@ -10,4 +10,4 @@ COPY . .
 RUN python ./manage.py migrate
 RUN yes yes | python ./manage.py collectstatic
 
-CMD [ "gunicorn", "-b", "0.0.0.0:8000", "acm_website.wsgi" ]
+CMD [ "gunicorn", "-b", "0.0.0.0:8000", "cns_website.wsgi" ]

@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("acm_website", "0003_alter_badge_color"),
+        ("cns_website", "0003_alter_badge_color"),
     ]
 
     operations = [

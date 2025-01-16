@@ -1,5 +1,5 @@
 """
-URL configuration for acm_website project.
+URL configuration for cns_website project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -26,9 +26,6 @@ urlpatterns = [
     path("about/<int:year>/", views.past_officers, name="past_officers"),
     path("about/", views.about, name="about"),
     path("events/", views.events, name="events"),
-    path("icpc/", views.icpc, name="icpc"),
-    path("donate/", views.donate, name="donate"),
-    path("hspc/", views.hspc, name="hspc"),
     path("users/<str:username>/", views.user_page, name="user_page"),
     path("events/<int:event>/", views.event_page, name="event_page"),
     path("accounts/logout/", views.logout_page, name="logout_page"),

@@ -333,8 +333,8 @@ class Migration(migrations.Migration):
                         default=django.utils.timezone.now, verbose_name="date joined"
                     ),
                 ),
-                ("badges", models.ManyToManyField(to="acm_website.badge")),
-                ("events_attended", models.ManyToManyField(to="acm_website.event")),
+                ("badges", models.ManyToManyField(to="cns_website.badge")),
+                ("events_attended", models.ManyToManyField(to="cns_website.event")),
                 (
                     "groups",
                     models.ManyToManyField(

@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class FrontendConfig(AppConfig):
-    name = "acm_website"
-    verbose_name = "ACM @ UVA Website"
+    name = "cns_website"
+    verbose_name = "CNS @ UVA Website"

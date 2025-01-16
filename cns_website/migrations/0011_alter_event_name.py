@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("acm_website", "0010_alter_badge_description"),
+        ("cns_website", "0010_alter_badge_description"),
     ]
 
     operations = [

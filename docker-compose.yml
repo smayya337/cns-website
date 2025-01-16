@@ -4,7 +4,7 @@ services:
   website:
     build: .
     volumes:
-      - ./acm_website/secret.py:/usr/src/app/acm_website/secret.py
+      - ./cns_website/secret.py:/usr/src/app/cns_website/secret.py
       - ./media:/usr/src/app/media
       - ./db.sqlite3:/usr/src/app/db.sqlite3
     ports:

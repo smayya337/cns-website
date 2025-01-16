@@ -1,18 +1,18 @@
-# ACM @ UVA Website
+# CNS @ UVA Website
 
-This is the source code for a brand-new ACM @ UVA website written using Django and Bootstrap.
+This is the source code for a brand-new CNS @ UVA website written using Django and Bootstrap.
 
 ## Deploy the Site
 
 ```bash
 # clone repo
-git clone https://github.com/smayya337/acm-website
+git clone https://github.com/smayya337/cns-website
 # enter repo
-cd acm-website
+cd cns-website
 # create secret configuration settings file
-cp acm_website/secret.py.example acm_website/secret.py
+cp cns_website/secret.py.example cns_website/secret.py
 # edit secret configuration settings
-nano acm_website/secret.py # substitute with your favorite editor
+nano cns_website/secret.py # substitute with your favorite editor
 # create virtual environment
 virtualenv .venv
 # enter virtual environment
@@ -26,5 +26,5 @@ python ./manage.py collectstatic
 # create admin user
 python ./manage.py createsuperuser
 # start app
-gunicorn -b 0.0.0.0:8000 acm_website.wsgi
+gunicorn -b 0.0.0.0:8000 cns_website.wsgi
 ```

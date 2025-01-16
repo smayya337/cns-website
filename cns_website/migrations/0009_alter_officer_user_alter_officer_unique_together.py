@@ -8,7 +8,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("acm_website", "0008_user_hide"),
+        ("cns_website", "0008_user_hide"),
     ]
 
     operations = [

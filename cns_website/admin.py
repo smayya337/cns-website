@@ -11,7 +11,7 @@ class UserAdmin(BaseUserAdmin):
             _("Personal info"),
             {"fields": ("first_name", "last_name", "email", "bio", "image", "hide")},
         ),
-        (_("ACM status"), {"fields": ("events_attended", "badges")}),
+        (_("CNS status"), {"fields": ("events_attended", "badges")}),
         (
             _("Permissions"),
             {

@@ -9,7 +9,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("acm_website", "0004_user_image"),
+        ("cns_website", "0004_user_image"),
     ]
 
     operations = [

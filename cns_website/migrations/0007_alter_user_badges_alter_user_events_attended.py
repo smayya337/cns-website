@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("acm_website", "0006_alter_user_badges_alter_user_events_attended"),
+        ("cns_website", "0006_alter_user_badges_alter_user_events_attended"),
     ]
 
     operations = [
         migrations.AlterField(
             model_name="user",
             name="badges",
-            field=models.ManyToManyField(blank=True, to="acm_website.badge"),
+            field=models.ManyToManyField(blank=True, to="cns_website.badge"),
         ),
         migrations.AlterField(
             model_name="user",
             name="events_attended",
-            field=models.ManyToManyField(blank=True, to="acm_website.event"),
+            field=models.ManyToManyField(blank=True, to="cns_website.event"),
         ),
     ]
